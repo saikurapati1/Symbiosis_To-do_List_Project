@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .navbar {
+            background-color: rgb(40, 174, 204);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 25px;
+            width: 97%;
+            height: 80px;
+            margin: 10px auto;
+        }
+
+        .navbar-brand {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand i {
+            margin-right: 0.5rem;
+            color: #8a2be2;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            margin-right: 1rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        }
+
+        .nav-link i {
+            margin-right: 0.3rem;
+            color: #8a2be2;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #ffffff;
+            background-color: #495057;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+        }
+
+        body {
+            background-color: rgb(219, 219, 230);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            margin-top: 2rem;
+        }
+
+        .content-section {
+            display: flex;
+            align-items: center;
+            margin-top: 2rem;
+            padding-left: 30px;
+        }
+
+        .content-section img {
+            max-width: 100%;
+            height: 180px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-section .text-content {
+            max-width: 600px;
+            padding: 0%;
+            margin-left: 2rem;
+        }
+
+        table {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        table th, table td {
+            padding: 1rem;
+        }
+
+        table thead {
+            background-color: rgb(74, 80, 85);
+            color: #fff;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        table tbody tr:hover {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="#"><i class="fas fa-tasks"></i> To-Do List</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link active" href="/"><i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/add"><i class="fas fa-plus-circle"></i> Add Task</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="content-section">
+        <img src="/images/todolist.png" alt="To-Do Image">
+        <div class="text-content">
+            <center>
+            <h2 style="font-family: 'Times New Roman';">Welcome</h2> 
+            <h5 style="font-family: monospace;">to</h5>
+            <h1 style="font-family: 'Times New Roman';">To-Do List</h1>
+            </center>
+            <p style="font-family: 'Times New Roman';">This is a To-Do List website which is helps individuals or teams manage their tasks efficiently. By keeping a list of activities or tasks arranged in order of priority, users can ensure that nothing important is overlooked, the benefits of using a to-do list are numerous. It helps in organizing tasks and activities, which leads to increased productivity by keeping individuals focused on what needs to be done next. Additionally, to-do lists are essential for effective time management, allowing users to plan and allocate specific times for each task.</p>
+        </div>
+    </div>
+    <div class="mt-4">
+        <h2 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Task List</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Due Date</th>
+                    <th>Update/ Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="task, iterStat : ${tasks}">
+                    <td th:text="${iterStat.index + 1}"></td>
+                    <td th:text="${task.title}"></td>
+                    <td th:text="${task.description}"></td>
+                    <td th:text="${task.dueDate}"></td>
+                    <td>
+                        <a th:href="@{/update/{index}(index=${iterStat.index})}" class="btn btn-primary btn-sm">Update</a>
+                        <a th:href="@{/delete/{index}(index=${iterStat.index})}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
